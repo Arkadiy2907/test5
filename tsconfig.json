@@ -15,7 +15,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "typeRoots": ["node_modules/@types"],
+    "types": ["react-hook-form"]
   },
   "include": ["src"]
 }

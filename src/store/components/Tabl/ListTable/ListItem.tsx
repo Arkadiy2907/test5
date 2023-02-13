@@ -6,6 +6,7 @@ import { createRowInEntity, updateRow } from "../../../../api";
 import row from "../../../../assets/row.svg";
 import bin from "../../../../assets/bin.svg";
 import { useForm } from "react-hook-form";
+// import { useForm } from "@hookform/form";
 import { DefaultMyState, TableObjId, eIdObj } from "../../../../types";
 import Canvas from "../canvas/Canvas";
 

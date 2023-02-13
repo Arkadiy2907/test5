@@ -5,11 +5,12 @@ import {
 } from "./store/action/Action";
 import startObj from "./store/components/AllFakeData/startObj";
 import { TableObj } from "./types";
+import axios from "axios";
 
 const query = "http://185.244.172.108:8081/v1/outlay-rows/entity/";
 
 export const createEntity = () => {
-  // @ts-ignore 
+  // @ts-ignore
   const eID = JSON.parse(localStorage.getItem("localEID"));
   if (eID === null) {
     console.log(
@@ -17,11 +18,10 @@ export const createEntity = () => {
       eID
     );
     return (dispatch: (arg0: { type: string; payload: any }) => any) => {
-      fetch(`${query}create`, {
-        method: "POST",
-      })
-        .then((response) => response.json())
-        .then((json) => dispatch(createEntityAction(json)));
+      axios
+        .post(`${query}create`)
+        .then((response) => dispatch(createEntityAction(response.data)))
+        .catch((err) => console.log(err));
     };
   }
   return (dispatch: (arg0: { type: string; payload: any }) => void) => {
@@ -32,31 +32,24 @@ export const createEntity = () => {
 export const getTreeRows = (eID: any) => {
   console.log("при загрузки экрана появится 1 раз c eID=", eID);
   return (dispatch: (arg0: { type: string; payload: any }) => any) => {
-    fetch(`${query}${eID}/row/list`)
-      .then((response) => response.json())
-      .then((json) => dispatch(getTreeRowsAction(json)));
+    axios
+      .get(`${query}${eID}/row/list`)
+      .then((response) => dispatch(getTreeRowsAction(response.data)))
+      .catch((err) => console.log(err));
   };
 };
 
 export const createRowInEntity = (eID: string) => {
-  //parentID = null
   return (dispatch: (arg0: { type: string; payload: any }) => any) => {
-    fetch(`${query}${eID}/row/create`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(startObj),
-    })
-      .then((response) => response.json())
-      .then((json) => dispatch(createRowInEntityAction(json)));
+    axios
+      .post(`${query}${eID}/row/create`, startObj)
+      .then((response) => dispatch(createRowInEntityAction(response.data)));
   };
 };
 
 export const deleteRow = (eID: any, rID: any) => {
   return () => {
-    fetch(`${query}${eID}/row/${rID}/delete`, {
-      method: "DELETE",
+    axios.delete(`${query}${eID}/row/${rID}/delete`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -66,12 +59,10 @@ export const deleteRow = (eID: any, rID: any) => {
 
 export const updateRow = (Obj: TableObj, eID: any, rID: string) => {
   return () => {
-    fetch(`${query}${eID}/row/${rID}/update`, {
-      method: "POST",
+    axios.post(`${query}${eID}/row/${rID}/update`, JSON.stringify(Obj), {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(Obj),
     });
   };
 };
