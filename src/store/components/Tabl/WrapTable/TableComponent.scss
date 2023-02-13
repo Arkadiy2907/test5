@@ -1,0 +1,160 @@
+@import "../../../../optionStyle.scss";
+
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .wrap {
+    width: 100%;
+    background: $black;
+    height: 100vh;
+    overflow: auto;
+
+    .header__wrap {
+      display: flex;
+      min-height: 2.5rem;
+      height: 2.5rem;
+
+      width: 100%;
+      border-bottom: 1px solid $border;
+
+      .header {
+        display: flex;
+        width: 16.5%;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 14px;
+        line-height: 16px;
+        color: $gray;
+
+        .active {
+          color: $white;
+          padding: 11px 0;
+          border-bottom: 2px solid $white;
+        }
+      }
+    }
+
+    .table {
+      display: flex;
+      min-height: 95.5%;
+
+      .tableAsid__wrap {
+        display: flex;
+        flex-direction: column;
+        width: 12.5%;
+
+        .tableAsid__header {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          border-bottom: 1px solid $border;
+          border-right: 1px solid $border;
+          min-height: 2.5rem;
+          height: 2.5rem;
+
+          .tableAsid__title {
+            margin-right: 2rem;
+            padding: 5px 0;
+            font-size: 16px;
+            color: $gray;
+
+            .small {
+              font-size: 10px;
+            }
+          }
+        }
+
+        .tableAsid__button {
+          display: flex;
+          flex-direction: column;
+          border-right: 1px solid $border;
+          height: 100%;
+          padding: 5px 0;
+          overflow-y: auto;
+
+          li {
+            list-style-type: none;
+            padding: 8px 0 8px 15px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s linear;
+
+            .img {
+              max-height: 16px;
+            }
+
+            .button {
+              width: 100%;
+              margin-left: 15px;
+              text-align: left;
+              font-size: 14px;
+              color: $white;
+            }
+
+            &:first-child:hover {
+              cursor: pointer;
+              color: $white;
+              background: $gray;
+            }
+          }
+        }
+      }
+
+      .tableList__wrap {
+        display: flex;
+        flex-direction: column;
+        width: 87.5%;
+
+        .tableList__title {
+          text-align: left;
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 21px;
+          color: $white;
+          min-height: 2.5rem;
+          height: 2.5rem;
+          border-bottom: 1px solid $border;
+          width: 100%;
+          padding: 11px 0 12px 15px;
+        }
+
+        .tableList__header {
+          @include tableList__header($gray);
+          justify-content: space-between;
+          margin: 0 1.5rem;
+
+          li {
+            max-width: 100%;
+            overflow: auto;
+
+            &:nth-child(1) {
+              width: 6.8rem;
+              text-align: center;
+            }
+            &:nth-child(2) {
+              @include nth-child(34%);
+            }
+
+            &:nth-child(3) {
+              @include nth-child(10%);
+            }
+            &:nth-child(4) {
+              @include nth-child(10%);
+            }
+
+            &:nth-child(5) {
+              @include nth-child(11%);
+            }
+            &:nth-child(6) {
+              @include nth-child(14%);
+            }
+          }
+        }
+      }
+    }
+  }
+}

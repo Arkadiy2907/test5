@@ -1,0 +1,110 @@
+@import "../../../../optionStyle.scss";
+
+.table__wrap {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 0 10px;
+  position: relative;
+  overflow: auto;
+
+  .table__form {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid $border;
+    overflow: auto;
+    height: 60px;
+
+    .table__form__row {
+      @include tableList__header($white);
+      width: 100%;
+      height: 100%;
+
+      li {
+        max-width: 100%;
+
+        &:first-child {
+          width: 110px;
+          height: 100%;
+          display: flex;
+          align-items: center;
+
+          .level__button {
+            @extend %level__button;
+
+            &:hover {
+              background: $border;
+              border: $border;
+
+              .level {
+                background: $border;
+              }
+
+              .level-bin {
+                background: $border;
+                cursor: pointer;
+                border: $border;
+                visibility: visible;
+              }
+            }
+          }
+        }
+
+        &:nth-child(2) {
+          @include nth-child(35%);
+        }
+
+        input {
+          &[type="text"] {
+            @extend %typeText;
+            border: 0;
+            color: $white;
+          }
+        }
+      }
+    }
+
+    .table__form__row_active {
+      @include tableList__header($gray);
+      width: 100%;
+      height: 100%;
+
+      li {
+        max-width: 100%;
+
+        &:first-child {
+          width: 110px;
+          height: 100%;
+          display: flex;
+          align-items: center;
+
+          .level__button {
+            @extend %level__button;
+          }
+        }
+
+        &:nth-child(2) {
+          @include nth-child(35%);
+        }
+
+        input {
+          &[type="text"] {
+            @extend %typeText;
+            color: $gray;
+            border-radius: 5%;
+            border: 1px solid $border;
+
+            &:nth-child(1) {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@import "../../../../optionStyle.scss";
+
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; //for work canvas and hover together!!!
+}
