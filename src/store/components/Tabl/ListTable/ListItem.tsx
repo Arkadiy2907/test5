@@ -6,7 +6,6 @@ import { createRowInEntity, updateRow } from "../../../../api";
 import row from "../../../../assets/row.svg";
 import bin from "../../../../assets/bin.svg";
 import { useForm } from "react-hook-form";
-// import { useForm } from "@hookform/form";
 import { DefaultMyState, TableObjId, eIdObj } from "../../../../types";
 import Canvas from "../canvas/Canvas";
 
@@ -28,6 +27,7 @@ const ListItem = ({ table, eID, height }: Props) => {
   const [isReadonly, setIsReadonly] = React.useState(true); // no change row
   const [isActiveStyle, setIsActiveStyle] = React.useState(false); //edded style active row
   const [isEnter, setIsEnter] = React.useState(false); // key enter click
+  const [isFirstEnter, setIsFirstEnter] = React.useState(false); // is click first row enter
 
   const {
     register,
@@ -96,13 +96,17 @@ const ListItem = ({ table, eID, height }: Props) => {
   };
 
   //======================================= update;
+
   React.useEffect(() => {
+    if (rows.length > 1) setIsFirstEnter(true);
+    if (rows.length === 0) setIsFirstEnter(false);
+
     if (rows.length !== 1 && remove) return;
-    if (Number(rows.at(-1)!.id) === Number(formData.id)) {
+    if (Number(rows.at(-1)!.id) === Number(formData.id) && !isFirstEnter) {
       setIsActiveStyle(true);
       setIsReadonly(false);
     }
-  }, [formData, rows]);
+  }, [formData, rows, isFirstEnter]);
 
   return (
     rows && (
